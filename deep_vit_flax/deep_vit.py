@@ -17,11 +17,11 @@ ModuleDef = Any
 class DeepViTConfig:
     num_classes: int = 1000
     depth: int = 32
-    mlp_dim: int = 408
+    mlp_dim: int = 1224
     token_dim: int = 64
-    emb_dim: int = 768
+    emb_dim: int = 408
     num_heads: int = 12
-    dim_head: int = 64
+    dim_head: int = 32
     shared_theta: bool = True
     activation_fn: ModuleDef = nn.gelu
     dtype: jnp.dtype = jnp.float32
