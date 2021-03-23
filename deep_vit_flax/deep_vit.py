@@ -108,6 +108,7 @@ class ReAttention(nn.Module):
                                   query,
                                   key,
                                   precision=cfg.precision)
+        attn_weights = nn.softmax(attn_weights).astype(cfg.dtype)
 
         if cfg.shared_theta:
             attn_weights = self.theta_transform(attn_weights)
@@ -115,7 +116,6 @@ class ReAttention(nn.Module):
             attn_weights = ThetaTransform(config=cfg)(attn_weights)
 
         attn_weights = nn.LayerNorm()(attn_weights)
-        attn_weights = nn.softmax(attn_weights).astype(cfg.dtype)
 
         out = jnp.einsum('b h q k, b q h d -> b k h d',
                          attn_weights,
